@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Graduação | Capoeira Raça Brasil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Oswald:wght@500&display=swap" rel="stylesheet">
+    <style>
+        /* ------------------------------------- */
+        /* VARIÁVEIS, RESET & BASE (TEMA BRASIL CLEAN) */
+        /* ------------------------------------- */
+        :root {
+            /* Cores da Bandeira do Brasil como Destaque Principal */
+            --cor-verde-brasil: #009739;
+            --cor-amarelo-brasil: #FFDF00; 
+            --cor-azul-brasil: #002776; 
+            
+            --cor-primaria: var(--cor-verde-brasil); 
+            --cor-secundaria: var(--cor-amarelo-brasil); 
+            
+            --cor-fundo: #f0f0f5; /* Cinza muito claro */
+            --cor-fundo-card: rgba(255, 255, 255, 0.85); /* Transparente cristal (quase branco) */
+            --cor-texto: #333333; /* Texto escuro */
+            --cor-texto-body: #555555; /* Texto mais suave */
+            --cor-sombra: rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto);
+            line-height: 1.6;
+            min-height: 100vh;
+            /* Fundo com gradiente suave */
+            background-image: linear-gradient(135deg, #ffffff 0%, #f0f0f5 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* ------------------------------------- */
+        /* HEADER (GRADIENTE BRASIL ANIMADO E LOGO) */
+        /* ------------------------------------- */
+        header {
+            text-align: center;
+            padding: 50px 20px;
+            /* Gradiente animado nas cores da bandeira */
+            background: linear-gradient(90deg, var(--cor-verde-brasil), var(--cor-amarelo-brasil), var(--cor-azul-brasil));
+            color: #ffffff;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            background-size: 300% 300%;
+            animation: gradientBrasilShift 15s ease infinite;
+        }
+
+        /* Animação do gradiente de fundo */
+        @keyframes gradientBrasilShift {
+            0% {background-position: 0% 50%;}
+            50% {background-position: 100% 50%;}
+            100% {background-position: 0% 50%;}
+        }
+        
+        /* Estilo da Imagem/Logo no Header */
+        .header-logo {
+            max-width: 120px; /* Tamanho adequado para logo de banner */
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 50%; 
+            padding: 5px; 
+            background-color: rgba(255, 255, 255, 0.9); /* Fundo semi-transparente para destaque */
+            border: 3px solid var(--cor-amarelo-brasil); /* Borda amarela do Brasil para destaque */
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.6); /* Efeito de brilho */
+            display: block; 
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        header h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3.5rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #ffffff; 
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        header p {
+            color: #e0e0e0;
+        }
+
+        .section-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2.2rem;
+            color: var(--cor-primaria); /* Título em verde Brasil */
+            border-bottom: 3px solid var(--cor-azul-brasil); /* Linha em azul Brasil */
+            padding-bottom: 5px;
+            margin: 40px 0 25px 0;
+            text-transform: uppercase;
+        }
+        
+        /* ------------------------------------- */
+        /* CARDS (ESTILO FROSTED GLASS CLARO) */
+        /* ------------------------------------- */
+        .grid-fases {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            padding-bottom: 40px;
+        }
+
+        .card-graduacao {
+            background-color: var(--cor-fundo-card);
+            border-radius: 15px;
+            overflow: hidden;
+            /* Efeito de Vidro Fosco (Light) */
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.6); 
+            box-shadow: 0 8px 30px var(--cor-sombra);
+            display: flex;
+            flex-direction: column;
+            
+            /* Transições suaves e elegantes */
+            transition: transform 0.4s ease-out, box-shadow 0.4s ease-out;
+            will-change: transform, box-shadow; 
+        }
+
+        .card-graduacao:hover {
+            transform: translateY(-8px); 
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.25); 
+            background-color: rgba(255, 255, 255, 0.95); 
+        }
+
+        .card-header {
+            padding: 15px 20px;
+            text-align: center;
+            color: var(--cor-texto);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            background-color: rgba(255, 255, 255, 0.9); 
+        }
+
+        .card-header h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.4rem;
+            margin-top: 5px;
+        }
+        
+        .card-body {
+            padding: 20px;
+            flex-grow: 1;
+        }
+
+        .card-body p {
+            font-size: 0.95rem;
+            color: var(--cor-texto-body);
+            text-align: justify;
+        }
+
+        .corda-img {
+            max-width: 100px; 
+            height: auto;
+            margin: 0 auto 15px auto;
+            display: block;
+            border: 1px solid var(--cor-amarelo-brasil); 
+            border-radius: 5px;
+            box-shadow: 0 2px 5px var(--cor-sombra);
+        }
+        
+        /* ------------------------------------- */
+        /* CORES DAS FASES (DESTAQUE NA BORDA SUPERIOR) */
+        /* ------------------------------------- */
+        
+        .fase-Infantil { border-top: 5px solid #00BCD4; } 
+        .fase-Alunos { border-top: 5px solid #FFC107; } 
+        .fase-Graduados { border-top: 5px solid #007bff; } 
+        .fase-Instrutoria { border-top: 5px solid #28a745; } 
+        .fase-Professorado { border-top: 5px solid #6f42c1; } 
+        .fase-ContraMestre { border-top: 5px solid #8B4513; } 
+        .fase-Mestrandos { border-top: 5px solid #000000; } 
+        .fase-Mestres { border-top: 5px solid #dc3545; } 
+        .fase-GraoMestre { border-top: 5px solid #dc3545; } 
+
+        /* Cores dos títulos internos */
+        .fase-Infantil .card-header h3 { color: #00BCD4; }
+        .fase-Alunos .card-header h3 { color: #FFC107; }
+        .fase-Graduados .card-header h3 { color: #007bff; }
+        .fase-Instrutoria .card-header h3 { color: #28a745; }
+        .fase-Professorado .card-header h3 { color: #6f42c1; }
+        .fase-ContraMestre .card-header h3 { color: #8B4513; }
+        .fase-Mestrandos .card-header h3 { color: #000000; }
+        .fase-Mestres .card-header h3 { color: #dc3545; }
+        .fase-GraoMestre .card-header h3 { color: #dc3545; }
+
+
+        /* ------------------------------------- */
+        /* SCROLL REVEAL ANIMATION (SUAVE) */
+        /* ------------------------------------- */
+        .card-graduacao {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .card-graduacao.visible {
+            opacity: 1;
+            transform: translateY(0);
+            /* Transição elegante e suave */
+            transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                        transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                        box-shadow 0.4s;
+        }
+
+        /* ------------------------------------- */
+        /* FOOTER */
+        /* ------------------------------------- */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto-body);
+            margin-top: 40px;
+            border-top: 3px solid var(--cor-azul-brasil); /* Rodapé com borda azul Brasil */
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        /* ------------------------------------- */
+        /* RESPONSIVIDADE */
+        /* ------------------------------------- */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5rem;
+            }
+            .section-title {
+                font-size: 1.8rem;
+            }
+            .grid-fases {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="logo.jpeg" alt="Logotipo Capoeira Raça Brasil" class="header-logo">
+        <h1>Sistema de Graduação</h1>
+        <p>A Jornada das Cordas do Grupo de Capoeira Raça Brasil</p>
+    </header>
+
+    <div class="container">
+        
+        <h2 class="section-title">Fase I: O Despertar (Graduações Infantis)</h2>
+        <p style="color: var(--cor-texto-body); margin-bottom: 20px;">Esta fase inicial é focada no desenvolvimento motor, disciplina, musicalidade e nos fundamentos lúdicos da Capoeira, essenciais para a formação dos capoeiristas mirins.</p>
+
+        <div class="grid-fases">
+            
+            <div class="card-graduacao fase-Infantil">
+                <div class="card-header">
+                    <span style="font-size: 0.9rem;">Corda 1</span>
+                    <h3>Azul Claro</h3>
+                </div>
+                <div class="card-body">
+                    <img src="1 - azul claro.png" alt="Corda Azul Claro" class="corda-img">
+                    <p>Corda de batizado e iniciação, simbolizando a pureza e o entusiasmo dos primeiros passos na Capoeira. O foco é o desenvolvimento da coordenação motora, o aprendizado da base fundamental, a execução correta da ginga e a compreensão dos comandos básicos da roda. É o despertar para a arte.</p>
+                </div>
+            </div>
+
+            <div class="card-graduacao fase-Infantil">
+                <div class="card-header">
+                    <span style="font-size: 0.9rem;">Corda 2</span>
+                    <h3>Azul Claro/Laranja</h3>
+                </div>
+                <div class="card-body">
+                    <img src="2 - azul claro e laranja.png" alt="Corda Azul Claro e Laranja" class="corda-img">
+                    <p>Esta corda mista representa a transição e a mescla da pureza inicial com a energia do Laranja. O Capoeirista mirim demonstra um aumento significativo na consciência corporal, maior controle sobre os movimentos e um esforço notável na memorização de sequências lúdicas e dos primeiros cânticos tradicionais do repertório.</p>
+                </div>
+            </div>
+
+            <div class="card-graduacao fase-Infantil">
+                <div class="card-header">
+                    <span style="font-size: 0.9rem;">Corda 3</span>
+                    <h3>Laranja</h3>
+                </div>
+                <div class="card-body">
+                    <img src="3 - laranja.png" alt="Corda Laranja" class="corda-img">
+                    <p>O Laranja simboliza a concentração e o foco necessários para o aprimoramento contínuo dos fundamentos. Nesta fase, o aluno já consegue dominar a execução dos movimentos básicos com segurança, demonstra iniciativa na roda e começa a reconhecer os toques dos instrumentos, entendendo seu papel na bateria.</p>
+                </div>
+            </div>
+
+            <div class="card-graduacao fase-Infantil">
+                <div class="card-header">
+                    <span style="font-size: 0.9rem;">Corda 4</span>
+                    <h3>Laranja/Branco</h3>
+                </div>
+                <div class="card-body">
+                    <img src="4 - branca e laranja.png" alt="Corda Laranja e Branco" class="corda-img">
+                    <p>Esta corda marca o estágio final da fase infantil. A disciplina do Laranja se une ao Branco, que simboliza o conhecimento preliminar e a humildade. O aluno está preparado, com maturidade e fundamentos sólidos, para ingressar no sistema de graduação adulto e enfrentar novos desafios com responsabilidade.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <h2 class="section-title">Fase II: Formação e Conhecimento (Alunos)</h2>
+        <p style="color: var(--cor-texto-body); margin-bottom: 20px;">Nesta fase, o aluno adulto consolida sua base física e teórica. É o momento de aprofundamento na história, tradições e regionalismos da Capoeira, exigindo dedicação constante.</p>
+
+        <div class="grid-fases">
+
+            <div class="card-graduacao fase-Alunos">
+                <div class="card-header">
+                    <span style="font-size: 0.9rem;">Corda 5</span>
+                    <h3>Branca</h3>
+                </div>
+                <div class="card-body">
+                    <img src="5 - branca.png" alt="Corda Branca" class="corda-img">
+                    <p>É a corda que sela a entrada no sistema adulto. A cor Branca representa a humildade essencial para o aprendizado contínuo. O aluno deve demonstrar total receptividade à filosofia do grupo, dedicando-se à aquisição das técnicas básicas de defesa, ataque e movimentação de solo, e demonstrando o desejo genuíno de evoluir na arte.</p>
+                </div>
+            </div>
+
+            <div class="card-graduacao fase-Alunos">
+                <div class="card-header">
+                    <span style="font-size: 0.9rem;">Corda 6</span>
+                    <h3>Branca/Amarela</h3>
+                </div>
+                <div class="card-body">
+                    <img src="6 - branca e amarela.png" alt="Corda Branca e Amarela" class="corda-img">
+                    <p>Simboliza a luz do conhecimento que começa a se manifestar com clareza. O aluno adquire maior firmeza e cadência na ginga, executa sequências combinadas com mais fluidez e inicia a compreensão do "jogo de dentro" e da malícia. A disciplina e o controle emocional e físico são aprimorados, preparando-o para a próxima etapa.</p>
+                </div>
+            </div>
+
+            <div class="card-graduacao fase-Alunos">
+                <div class="card-header">
+                    <span style="font-size: 0.9rem;">Corda 7</span>
+                    <h3>Amarela</h3>
+                </div>
+                <div class="card-body">
+                    <img src="7 - amarela.png" alt="Corda Amarela" class="corda-img">
+                    <p>O Amarelo representa o "Ouro do Aprendizado", indicando que o aluno alcançou um patamar significativo de conhecimento técnico e cultural. É exigido o domínio da musicalidade, o reconhecimento e a capacidade de tocar os principais instrumentos. O aluno Amarelo assume um papel de maior responsabilidade no apoio aos iniciantes e na organização da roda, sendo um pilar para o grupo.</p>
+                </div>
+            </div>
+
+        </div>
+        
+        <h2 class="section-title">Fase III: Alunos Graduados (Representação e Consciência)</h2>
+        <p style="color: var(--cor-texto-body); margin-bottom: 20px;">O aluno alcança a maturidade técnica e teórica necessária para representar o grupo, sendo este o primeiro degrau oficial para a jornada de liderança.</p>
+
+        <div class="grid-fases">
+
+            <div class="card-graduacao fase-Graduados">
+                <div class="card-header">
+                    <span style="font-size: 0.9rem;">Corda 8</span>
+                    <h3>Amarela/Azul (Estagiário a Graduado)</h3>
+                </div>
+                <div class="card-body">
+                    <img src="8 - amarela e azul.png" alt="Corda Amarela e Azul" class="corda-img">
+                    <p>Estágio preparatório para a Graduação. O Ouro do Amarelo se une à vastidão e profundidade do Azul (Consciência). O Capoeirista demonstra a capacidade de ir além da execução técnica, iniciando a ministração de treinos básicos sob a orientação de um superior e servindo como um modelo de conduta, disciplina e ética para todos os alunos do grupo.</p>
+                </div>
+            </div>
+
+            <div class="card-graduacao fase-Graduados">
+                <div class="card-header">
+                    <span style="font-size: 0.9rem;">Corda 9</span>
+                    <h3>Azul (Graduado)</h3>
+                </div>
+                <div class="card-body">
+                    <img src="9 - azul.png" alt="Corda Azul" class="corda-img">
+                    <p>A Corda do Mar e da Consciência. O Graduado é um capoeirista plenamente formado, dominando um vasto repertório de técnicas, a rica história e o conhecimento teórico-cultural da Capoeira. Seu jogo é caracterizado pela estratégia, consciência e inteligência. É o ponto de partida para a liderança, assumindo a responsabilidade de zelar pelo respeito e a ordem dentro da roda e do grupo.</p>
+                </div>
+            </div>
+            
+        </div>
+        
+        <h2 class="section-title">Fase IV: Instrutoria (Início da Liderança)</h2>
+        <p style="color: var(--cor-texto-body); margin-bottom: 20px;">O graduado se torna um líder ativo e transmissor de conhecimento, focado na metodologia de ensino, na gestão de turmas iniciantes e no crescimento constante da sua capoeira.</p>
+
+        <div class="grid-fases">
+
+            <div class="card-graduacao fase-Instrutoria">
+                <div class="card-header">
+                    <span style="font-size: 0.9rem;">Corda 10</span>
+                    <h3>Azul/Verde (Estagiário a Instrutor)</h3>
+                </div>
+                <div class="card-body">
+                    <img src="10 - azul e verde.png" alt="Corda Azul e Verde" class="corda-img">
+                    <p>O Graduado inicia seu caminho na Liderança. A profundidade do Azul (Consciência) se une ao Verde (Esperança e Início da Liderança). O Estagiário começa ativamente o trabalho de ensino, sendo mentor de grupos menores. Aprende a planejar aulas, desenvolve a didática e a habilidade de lidar com a diversidade e as necessidades pedagógicas dos alunos, sob a supervisão do corpo docente.</p>
+                </div>
+            </div>
+
+            <div class="card-graduacao fase-Instrutoria">
+                <div class="card-header">
+                    <span style="font-size: 0.9rem;">Corda 11</span>
+                    <h3>Verde (Instrutor)</h3>
+                </div>
+                <div class="card-body">
+                    <img src="11 - verde.png" alt="Corda Verde" class="corda-img">
+                    <p>O Verde, Corda da Floresta e da Natureza, representa o crescimento constante. O Instrutor é um líder ativo, responsável pela gestão e formação de turmas em núcleos menores. Atua como o principal elo de transmissão da metodologia do grupo. Seu jogo reflete alta capacidade técnica, rapidez e eficácia, sempre aplicado com foco na didática e no desenvolvimento de cada um dos seus alunos.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <h2 class="section-title">Fase V: Professorado (Didática e Filosofia)</h2>
+        <p style="color: var(--cor-texto-body); margin-bottom: 20px;">O instrutor se aprofunda na filosofia da arte e desenvolve sua própria didática, gerenciando núcleos maiores e formando novos graduados. Esta fase exige excelência pedagógica e ética.</p>
+
+        <div class="grid-fases">
+
+            <div class="card-graduacao fase-Professorado">
+                <div class="card-header">
+                    <span style="font-size: 0.9rem;">Corda 12</span>
+                    <h3>Verde/Roxa (Estagiário a Professor)</h3>
+                </div>
+                <div class="card-body">
+                    <img src="12 - verde e roxo.png" alt="Corda Verde e Roxo" class="corda-img">
+                    <p>Prepara-se para a grande responsabilidade do Professorado. O Verde (Crescimento) se une ao Roxo (Intuição e Transição Filosófica). Demonstra profunda experiência em liderança e começa a solidificar e aplicar uma didática própria, baseada nos ensinamentos do grupo, sendo um mentor de instrutores e graduados em formação.</p>
+                </div>
+            </div>
+            
+            <div class="card-graduacao fase-Professorado">
+                <div class="card-header">
+                    <span style="font-size: 0.9rem;">Corda 13</span>
+                    <h3>Roxa (Professor)</h3>
+                </div>
+                <div class="card-body">
+                    <img src="13 - roxo.png" alt="Corda Roxa" class="corda-img">
+                    <p>Corda da Intuição, Filosofia e do Legado. O Professor é um líder completo, formador de novos capoeiristas, instrutores e graduados, gerindo um núcleo ou academia com autonomia. É um mestre na arte de jogar, possuindo um jogo maduro e cheio de malícia. Detém profundo conhecimento da história, das tradições e da filosofia da Capoeira, sendo um referencial de ética e técnica.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <h2 class="section-title">Fase VI: Contra-Mestre (Raízes e Solidez)</h2>
+        <p style="color: var(--cor-texto-body); margin-bottom: 20px;">O Professor demonstra a solidez de sua base, sendo um mentor experiente e o braço direito da Mestrança na orientação de professores e na gestão estratégica regional do grupo.</p>
+
+        <div class="grid-fases">
+
+            <div class="card-graduacao fase-ContraMestre">
+                <div class="card-header">
+                    <span style="font-size: 0.9rem;">Corda 14</span>
+                    <h3>Roxa/Marrom (Estagiário a Contra-Mestre)</h3>
+                </div>
+                <div class="card-body">
+                    <img src="14 - roxo e marrom.png" alt="Corda Roxa e Marrom" class="corda-img">
+                    <p>O Roxo (Filosofia) se une ao Marrom (Terra e Raízes), simbolizando a solidez da base e a vasta experiência do Professor. Neste estágio, ele assume o papel de braço direito da Mestrança, atuando ativamente na orientação de outros professores, participando da gestão estratégica do grupo e comprovando sua capacidade de liderança regional e administrativa.</p>
+                </div>
+            </div>
+
+            <div class="card-graduacao fase-ContraMestre">
+                <div class="card-header">
+                    <span style="font-size: 0.9rem;">Corda 15</span>
+                    <h3>Marrom (Contra-Mestre)</h3>
+                </div>
+                <div class="card-body">
+                    <img src="15 - marrom.png" alt="Corda Marrom" class="corda-img">
+                    <p>A Corda da Terra e das Raízes. O Contra-Mestre é a personificação da solidez e da experiência profunda na Capoeira. Sua função é de grande mentor, sendo o pilar técnico e ético para toda a área sob sua tutela. Seu jogo é a síntese da malícia, técnica e sabedoria, representando a transição para a Mestrança, onde o líder já é capaz de formar outros professores.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <h2 class="section-title">Fase VII: Mestrandos (Transição e Autoridade)</h2>
+        <p style="color: var(--cor-texto-body); margin-bottom: 20px;">O Contra-Mestre é reconhecido como um formador de mestres em potencial, sendo avaliado pela perpetuação do legado, pelo trabalho contínuo na comunidade e pela manutenção de uma conduta ética exemplar.</p>
+
+        <div class="grid-fases">
+
+            <div class="card-graduacao fase-Mestrandos">
+                <div class="card-header">
+                    <span style="font-size: 0.9rem;">Corda 16</span>
+                    <h3>Marrom/Preta (Estagiário a Mestrando)</h3>
+                </div>
+                <div class="card-body">
+                    <img src="16 - marrom e preto.png" alt="Corda Marrom e Preta" class="corda-img">
+                    <p>O Marrom (Solidez) se encontra com o Preto (Autoridade e Sabedoria). Este é o último e mais desafiador estágio antes da Mestrança. O Estagiário a Mestrando é avaliado pela perpetuação do legado, pelo trabalho contínuo na comunidade, pela formação de novos líderes em todos os níveis e pela manutenção de uma conduta ética irrepreensível que inspira todo o grupo em escala global.</p>
+                </div>
+            </div>
+
+            <div class="card-graduacao fase-Mestrandos">
+                <div class="card-header">
+                    <span style="font-size: 0.9rem;">Corda 17</span>
+                    <h3>Preta (Mestrando)</h3>
+                </div>
+                <div class="card-body">
+                    <img src="17 - preto.png" alt="Corda Preta" class="corda-img" style="max-width: 100px;">
+                    <p>Corda da Autoridade, da Tradição e do Saber. O Mestrando alcança o ápice da formação técnica, filosófica e pedagógica. Ele se torna uma referência viva da história e cultura da Capoeira. Seu compromisso é dedicar sua vida à preservação da arte, à expansão da filosofia do grupo e à formação de novos líderes de alto nível, sendo reconhecido por sua sabedoria no jogo e no ensino.</p>
+                </div>
+            </div>
+        </div>
+        
+        <h2 class="section-title">Fase VIII: Mestres (O Legado)</h2>
+        <p style="color: var(--cor-texto-body); margin-bottom: 20px;">Fase máxima da graduação. O Mestre é a referência viva, responsável por perpetuar a arte, a história e a filosofia da Capoeira, sendo um dos pilares de sustentação do grupo.</p>
+
+        <div class="grid-fases">
+
+            <div class="card-graduacao fase-Mestres">
+                <div class="card-header">
+                    <span style="font-size: 0.9rem;">Corda 18</span>
+                    <h3>Preta/Vermelha (Estagiário a Mestre)</h3>
+                </div>
+                <div class="card-body">
+                    <img src="18 - preto e vermelho.png" alt="Corda Preta e Vermelha" class="corda-img">
+                    <p>Estágio de Transição para o Mestre Pleno. O Preto (Autoridade) se une ao Vermelho (Vitalidade e Energia). Indica a longevidade e a vitalidade do legado do Mestrando, que deve comprovar a eficácia e a força da sua metodologia de ensino. Ele é uma figura central na manutenção das tradições e na evolução do grupo, orientando as políticas e a direção da Capoeira.</p>
+                </div>
+            </div>
+
+            <div class="card-graduacao fase-Mestres">
+                <div class="card-header">
+                    <span style="font-size: 0.9rem;">Corda 19</span>
+                    <h3>Vermelha (Mestre)</h3>
+                </div>
+                <div class="card-body">
+                    <img src="19 - vermelho.png" alt="Corda Vermelha" class="corda-img">
+                    <p>Corda do Fogo, da Vida e da Conquista. O Mestre é o guardião e propagador máximo da Capoeira. Sua influência transcende o grupo, sendo um formador de opinião e cultura no cenário mundial. Ele não apenas ensina, mas tem o poder de acender a chama da arte em seus alunos, sendo uma fonte inesgotável de sabedoria e conhecimento técnico-filosófico, honrando a ancestralidade.</p>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">Fase IX: Grão-Mestre (Pilar do Grupo)</h2>
+        <p style="color: var(--cor-texto-body); margin-bottom: 20px;">O mais alto grau da Capoeira. O Grão-Mestre é o Patriarca, a referência histórica e o pilar mais antigo e respeitado, reconhecido pela contribuição vital e eterna para a Capoeira mundial.</p>
+
+        <div class="grid-fases" style="max-width: 400px; margin: 0 auto;">
+
+            <div class="card-graduacao fase-GraoMestre">
+                <div class="card-header">
+                    <span style="font-size: 0.9rem;">Corda 20</span>
+                    <h3>Vermelha/Branco (Grão-Mestre)</h3>
+                </div>
+                <div class="card-body">
+                    <img src="20 - vermelho e branco.png" alt="Corda Vermelha e Branca" class="corda-img">
+                    <p>O Grau Máximo da Capoeira. O Vermelho (Vitalidade e Sanguinidade) se une ao Branco (Sabedoria Suprema, Humildade e Paz). O Grão-Mestre é o Patriarca, o pilar fundamental e a referência histórica do grupo. Sua graduação sela uma vida de dedicação integral à arte, sendo reconhecido mundialmente pela sua contribuição vital para a preservação, evolução e expansão da Capoeira como cultura brasileira no mundo.</p>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+    <footer>
+        <p>&copy; 2025 Grupo de Capoeira Raça Brasil. A jornada continua.</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const cards = document.querySelectorAll('.card-graduacao');
+            
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        // Aplica um pequeno delay baseado no índice para um efeito "cascata"
+                        entry.target.style.transitionDelay = `${index * 50}ms`;
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { 
+                threshold: 0.2 // Começa a animação quando 20% do card está visível
+            });
+
+            cards.forEach(card => {
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>
